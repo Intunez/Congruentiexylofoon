@@ -23,33 +23,37 @@ function showMalletAt(clientX, clientY) {
   mallet.style.left = `${x}px`;
   mallet.style.top  = `${y}px`;
 
-  // BELANGRIJK: elke keer opnieuw zichtbaar maken
-  mallet.style.display = "block";
-
-  // animatie opnieuw triggeren
+  // animatie elke keer herstarten
   mallet.classList.remove("hit");
   void mallet.offsetWidth; // force reflow
   mallet.classList.add("hit");
 
   clearTimeout(mallet._t);
   mallet._t = setTimeout(() => {
-    mallet.classList.remove("hit");
-    mallet.style.display = "none";
-  }, 180);
+    mallet.classList.remove("hit"); // wordt weer onzichtbaar door opacity:0
+  }, 200);
 }
 
-document.querySelectorAll(".key").forEach(key => {
-  key.addEventListener("pointerdown", (ev) => {
+// Gebruik zowel click als pointerdown (super robuust)
+document.querySelectorAll(".key").forEach((key) => {
+  const handler = (ev) => {
     ev.preventDefault();
 
     const note = key.dataset.note;
-
     const a = sounds[note];
     if (a) {
       a.currentTime = 0;
-      a.play().catch(console.error);
+      a.play().catch(() => {});
     }
 
-    showMalletAt(ev.clientX, ev.clientY);
-  });
+    // event-coördinaten
+    const clientX = ev.clientX ?? (ev.touches && ev.touches[0].clientX);
+    const clientY = ev.clientY ?? (ev.touches && ev.touches[0].clientY);
+    if (clientX != null && clientY != null) {
+      showMalletAt(clientX, clientY);
+    }
+  };
+
+  key.addEventListener("pointerdown", handler, { passive: false });
+  key.addEventListener("click", handler);
 });

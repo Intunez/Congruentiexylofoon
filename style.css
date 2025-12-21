@@ -1,10 +1,18 @@
+/* ---------- BASIS ---------- */
 body {
   font-family: Arial, sans-serif;
   background: #f4f4f4;
+  margin: 0;
+  padding: 0;
 }
 
+h1 {
+  margin: 16px 0;
+}
+
+/* ---------- XYLO CONTAINER ---------- */
 .xylo {
-  position: relative;
+  position: relative;                 /* ESSENTIEEL */
   width: 90%;
   max-width: 900px;
   aspect-ratio: 16 / 6;
@@ -15,6 +23,7 @@ body {
   background-position: center;
 }
 
+/* ---------- KLIKZONES (toetsen) ---------- */
 .key {
   position: absolute;
   top: 15%;
@@ -23,30 +32,35 @@ body {
   background: transparent;
   border: none;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
-.key:nth-child(2) { left: 2%; }
-.key:nth-child(3) { left: 11%; }
-.key:nth-child(4) { left: 20%; }
-.key:nth-child(5) { left: 29%; }
-.key:nth-child(6) { left: 38%; }
-.key:nth-child(7) { left: 47%; }
-.key:nth-child(8) { left: 56%; }
-.key:nth-child(9) { left: 65%; }
-.key:nth-child(10){ left: 73%; }
-.key:nth-child(11){ left: 81%; }
-.key:nth-child(12){ left: 89%; }
+/* Posities van de 11 balken */
+.key:nth-of-type(1)  { left: 2%; }
+.key:nth-of-type(2)  { left: 11%; }
+.key:nth-of-type(3)  { left: 20%; }
+.key:nth-of-type(4)  { left: 29%; }
+.key:nth-of-type(5)  { left: 38%; }
+.key:nth-of-type(6)  { left: 47%; }
+.key:nth-of-type(7)  { left: 56%; }
+.key:nth-of-type(8)  { left: 65%; }
+.key:nth-of-type(9)  { left: 73%; }
+.key:nth-of-type(10) { left: 81%; }
+.key:nth-of-type(11) { left: 89%; }
 
-/* Zorg dat mallet altijd bovenop ligt */
+/* ---------- MALLET (CSS GETEKEND) ---------- */
 .mallet {
   position: absolute;
-  width: 34px;
+  width: 44px;
   height: 220px;
-  display: none;
+
+  /* altijd aanwezig, enkel onzichtbaar */
+  display: block;
+  opacity: 0;
+
   pointer-events: none;
   z-index: 20;
 
-  /* zoals jouw foto: schuin naar rechts */
   transform: translate(-50%, -60%) rotate(20deg);
   transform-origin: 50% 20%;
 }
@@ -55,16 +69,13 @@ body {
 .mallet-head {
   position: absolute;
   left: 50%;
-  top: 0px;
+  top: 0;
   width: 44px;
   height: 44px;
   transform: translateX(-50%);
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #cfe6ff 0%, #76aef0 40%, #2f6fb8 100%);
   box-shadow: 0 8px 14px rgba(0,0,0,0.25);
-
-  /* wollig effect */
-  filter: saturate(1.05);
 }
 
 .mallet-head::before {
@@ -73,23 +84,9 @@ body {
   inset: -4px;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 20% 25%, rgba(255,255,255,0.55) 0 12%, transparent 13%),
+    radial-gradient(circle at 20% 25%, rgba(255,255,255,0.5) 0 12%, transparent 13%),
     radial-gradient(circle at 60% 30%, rgba(255,255,255,0.25) 0 10%, transparent 11%),
     radial-gradient(circle at 35% 60%, rgba(255,255,255,0.18) 0 12%, transparent 13%);
-  opacity: 0.9;
-}
-
-/* houten stok */
-.mallet-stick {
-  position: absolute;
-  left: 50%;
-  top: 34px;
-  width: 14px;
-  height: 185px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: linear-gradient(to right, #d8b27a 0%, #f0d6ad 28%, #c9995b 55%, #f0d6ad 80%, #d8b27a 100%);
-  box-shadow: 0 10px 12px rgba(0,0,0,0.18);
 }
 
 /* rood ringetje */
@@ -105,9 +102,29 @@ body {
   box-shadow: 0 2px 3px rgba(0,0,0,0.18);
 }
 
-/* tik-animatie */
+/* houten stok */
+.mallet-stick {
+  position: absolute;
+  left: 50%;
+  top: 60px;
+  width: 14px;
+  height: 160px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    #d8b27a 0%,
+    #f0d6ad 30%,
+    #c9995b 55%,
+    #f0d6ad 80%,
+    #d8b27a 100%
+  );
+  box-shadow: 0 10px 12px rgba(0,0,0,0.18);
+}
+
+/* ---------- MALLET ACTIE ---------- */
 .mallet.hit {
-  display: block;
+  opacity: 1;
   animation: malletTap 160ms ease-out;
 }
 
@@ -116,4 +133,3 @@ body {
   60%  { transform: translate(-50%, -60%) rotate(8deg)  scale(0.98); }
   100% { transform: translate(-50%, -60%) rotate(20deg) scale(1); }
 }
-

@@ -1,5 +1,3 @@
-<!-- rebuild -->
-
 <!doctype html>
 <html lang="nl">
 <head>
@@ -12,24 +10,26 @@
 
 <h1 style="text-align:center;">Congruentie-xylofoon</h1>
 
-<div id="mallet" class="mallet" aria-hidden="true">
-  <div class="mallet-head"></div>
-  <div class="mallet-band"></div>
-  <div class="mallet-stick"></div>
-</div>
+<div id="xylo" class="xylo">
+  <!-- MALLET (CSS-getekend) -->
+  <div id="mallet" class="mallet" aria-hidden="true">
+    <div class="mallet-head"></div>
+    <div class="mallet-band"></div>
+    <div class="mallet-stick"></div>
+  </div>
 
-
-  <button class="key" data-note="dolaag"></button>
-  <button class="key" data-note="relaag"></button>
-  <button class="key" data-note="milaag"></button>
-  <button class="key" data-note="falaag"></button>
-  <button class="key" data-note="sollaag"></button>
-  <button class="key" data-note="la"></button>
-  <button class="key" data-note="silaag"></button>
-  <button class="key" data-note="dohoog"></button>
-  <button class="key" data-note="rehoog"></button>
-  <button class="key" data-note="mihoog"></button>
-  <button class="key" data-note="fahoog"></button>
+  <!-- KLIKZONES (11 noten) -->
+  <button class="key" data-note="dolaag" aria-label="do laag"></button>
+  <button class="key" data-note="relaag" aria-label="re laag"></button>
+  <button class="key" data-note="milaag" aria-label="mi laag"></button>
+  <button class="key" data-note="falaag" aria-label="fa laag"></button>
+  <button class="key" data-note="sollaag" aria-label="sol laag"></button>
+  <button class="key" data-note="la" aria-label="la"></button>
+  <button class="key" data-note="silaag" aria-label="si laag"></button>
+  <button class="key" data-note="dohoog" aria-label="do hoog"></button>
+  <button class="key" data-note="rehoog" aria-label="re hoog"></button>
+  <button class="key" data-note="mihoog" aria-label="mi hoog"></button>
+  <button class="key" data-note="fahoog" aria-label="fa hoog"></button>
 </div>
 
 <script src="script.js"></script>

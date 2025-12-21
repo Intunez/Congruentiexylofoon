@@ -21,15 +21,9 @@ function showMalletAt(clientX, clientY) {
 
 function playNote(note) {
   const url = `assets/sounds/${note}.wav`;
-
-  // nieuwe Audio per klik = simpel en betrouwbaar
-  const a = new Audio(url);
-  a.currentTime = 0;
-
-  a.play().catch((e) => {
-    console.error("Audio play failed:", note, url, e);
-    alert(`Kan ${url} niet afspelen. Check bestandsnaam in assets/sounds/`);
-  });
+  const audio = new Audio(url);
+  audio.currentTime = 0;
+  audio.play();
 }
 
 document.querySelectorAll(".key").forEach((key) => {

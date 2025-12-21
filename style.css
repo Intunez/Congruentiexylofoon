@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+
+.xylo {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  aspect-ratio: 16 / 6;
+  margin: 0 auto;
+  background-image: url("assets/xyloafbeelding.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.key {
+  position: absolute;
+  top: 15%;
+  width: 8%;
+  height: 70%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.key:nth-child(2) { left: 2%; }
+.key:nth-child(3) { left: 11%; }
+.key:nth-child(4) { left: 20%; }
+.key:nth-child(5) { left: 29%; }
+.key:nth-child(6) { left: 38%; }
+.key:nth-child(7) { left: 47%; }
+.key:nth-child(8) { left: 56%; }
+.key:nth-child(9) { left: 65%; }
+.key:nth-child(10){ left: 73%; }
+.key:nth-child(11){ left: 81%; }
+.key:nth-child(12){ left: 89%; }
+
+.mallet {
+  position: absolute;
+  width: 80px;
+  display: none;
+  pointer-events: none;
+}

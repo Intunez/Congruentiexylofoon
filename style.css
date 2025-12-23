@@ -23,8 +23,7 @@ h1 {
   background-position: center;
 }
 
-/* ---------- KLIKZONES (toetsen) ---------- */
-/* Brede, vergevingsgezinde zones, gecentreerd op elke balk */
+/* ---------- KLIKZONES ---------- */
 .key {
   position: absolute;
   top: 15%;
@@ -40,7 +39,7 @@ h1 {
   transform: translateX(-50%);
 }
 
-/* Centres (links -> rechts) van de 11 balken */
+/* vaste centers van links naar rechts */
 .key:nth-of-type(1)  { --x: 6%; }
 .key:nth-of-type(2)  { --x: 15%; }
 .key:nth-of-type(3)  { --x: 24%; }
@@ -53,23 +52,18 @@ h1 {
 .key:nth-of-type(10) { --x: 85%; }
 .key:nth-of-type(11) { --x: 93%; }
 
-/* ---------- MALLET (CSS GETEKEND) ---------- */
+/* ---------- MALLET ---------- */
 .mallet {
   position: absolute;
   width: 44px;
   height: 220px;
-
-  display: block;
   opacity: 0;
-
   pointer-events: none;
   z-index: 20;
-
   transform: translate(-50%, -60%) rotate(20deg);
   transform-origin: 50% 20%;
 }
 
-/* blauwe wollige kop */
 .mallet-head {
   position: absolute;
   left: 50%;
@@ -79,21 +73,9 @@ h1 {
   transform: translateX(-50%);
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #cfe6ff 0%, #76aef0 40%, #2f6fb8 100%);
-  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 14px rgba(0,0,0,0.25);
 }
 
-.mallet-head::before {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 20% 25%, rgba(255,255,255,0.5) 0 12%, transparent 13%),
-    radial-gradient(circle at 60% 30%, rgba(255,255,255,0.25) 0 10%, transparent 11%),
-    radial-gradient(circle at 35% 60%, rgba(255,255,255,0.18) 0 12%, transparent 13%);
-}
-
-/* rood ringetje */
 .mallet-band {
   position: absolute;
   left: 50%;
@@ -103,10 +85,8 @@ h1 {
   transform: translateX(-50%);
   border-radius: 999px;
   background: linear-gradient(to right, #b30000 0%, #ff3b3b 40%, #a80000 100%);
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.18);
 }
 
-/* houten stok */
 .mallet-stick {
   position: absolute;
   left: 50%;
@@ -123,17 +103,16 @@ h1 {
     #f0d6ad 80%,
     #d8b27a 100%
   );
-  box-shadow: 0 10px 12px rgba(0, 0, 0, 0.18);
 }
 
-/* ---------- MALLET ACTIE ---------- */
+/* ---------- MALLET ANIMATIE ---------- */
 .mallet.hit {
   opacity: 1;
   animation: malletTap 160ms ease-out;
 }
 
 @keyframes malletTap {
-  0%   { transform: translate(-50%, -60%) rotate(20deg) scale(1); }
-  60%  { transform: translate(-50%, -60%) rotate(8deg)  scale(0.98); }
-  100% { transform: translate(-50%, -60%) rotate(20deg) scale(1); }
+  0%   { transform: translate(-50%, -60%) rotate(20deg); }
+  60%  { transform: translate(-50%, -60%) rotate(8deg); }
+  100% { transform: translate(-50%, -60%) rotate(20deg); }
 }

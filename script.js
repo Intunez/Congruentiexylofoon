@@ -1,13 +1,45 @@
 const mallet = document.getElementById("mallet");
 const xylo = document.getElementById("xylo");
 
-// Cache audio voor snellere respons
+/* VASTE NOOTVOLGORDE (links → rechts) */
+const notes = [
+  "dolaag",
+  "relaag",
+  "milaag",
+  "falaag",
+  "sol",
+  "la",
+  "si",
+  "dohoog",
+  "rehoog",
+  "mihoog",
+  "fahoog"
+];
+
+// audio cache
 const audioCache = new Map();
 
+function playNote(note) {
+  const url = `assets/sounds/${note}.mp3`;
+
+  let audio = audioCache.get(note);
+  if (!audio) {
+    audio = new Audio(url);
+    audioCache.set(note, audio);
+
+    audio.addEventListener("error", () => {
+      console.error("Kan audio niet laden:", url);
+    });
+  }
+
+  audio.currentTime = 0;
+  audio.play();
+}
+
 function showMalletAt(clientX, clientY) {
-  const xyloRect = xylo.getBoundingClientRect();
-  const x = clientX - xyloRect.left;
-  const y = clientY - xyloRect.top;
+  const rect = xylo.getBoundingClientRect();
+  const x = clientX - rect.left;
+  const y = clientY - rect.top;
 
   mallet.style.left = `${x}px`;
   mallet.style.top = `${y}px`;
@@ -22,39 +54,12 @@ function showMalletAt(clientX, clientY) {
   }, 200);
 }
 
-function playNote(note) {
-  const url = `assets/sounds/${note}.mp3`;
-
-  let audio = audioCache.get(note);
-  if (!audio) {
-    audio = new Audio(url);
-
-    // Als bestand niet gevonden wordt, zie je het meteen in de console
-    audio.addEventListener("error", () => {
-      console.error("Kan audio niet laden:", url);
-    });
-
-    audioCache.set(note, audio);
-  }
-
-  // opnieuw starten
-  audio.currentTime = 0;
-  audio.play().catch((err) => {
-    console.error("Audio play() mislukte:", url, err);
-  });
-}
-
-document.querySelectorAll(".key").forEach((key) => {
-  key.addEventListener(
-    "pointerdown",
-    (ev) => {
-      ev.preventDefault();
-
-      const note = key.dataset.note;
-      playNote(note);
-
-      showMalletAt(ev.clientX, ev.clientY);
-    },
-    { passive: false }
-  );
+/* knop-index → noot */
+document.querySelectorAll(".key").forEach((key, index) => {
+  key.addEventListener("pointerdown", (ev) => {
+    ev.preventDefault();
+    const note = notes[index];
+    playNote(note);
+    showMalletAt(ev.clientX, ev.clientY);
+  }, { passive: false });
 });

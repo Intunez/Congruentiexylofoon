@@ -22,6 +22,12 @@ function showMalletAt(clientX, clientY) {
 function playNote(note) {
   const url = `assets/sounds/${note}.mp3`;
   const audio = new Audio(url);
+
+  // 👉 DEBUG: toont fout als bestand niet bestaat
+  audio.addEventListener("error", () => {
+    console.error("Kan audio niet laden:", url);
+  });
+
   audio.currentTime = 0;
   audio.play();
 }

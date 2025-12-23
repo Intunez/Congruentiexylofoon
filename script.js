@@ -18,6 +18,9 @@ function showMalletAt(clientX, clientY) {
     mallet.classList.remove("hit");
   }, 200);
 }
+const note = key.dataset.note;
+console.log("Je klikte:", note);
+playNote(note);
 
 function playNote(note) {
   const url = `assets/sounds/${note}.mp3`;

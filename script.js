@@ -20,7 +20,7 @@ function showMalletAt(clientX, clientY) {
 }
 
 function playNote(note) {
-  const url = `assets/sounds/${note}.wav`;
+  const url = `assets/sounds/${note}.mp3`;
   const audio = new Audio(url);
   audio.currentTime = 0;
   audio.play();

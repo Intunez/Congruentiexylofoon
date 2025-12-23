@@ -12,7 +12,7 @@ h1 {
 
 /* ---------- XYLO CONTAINER ---------- */
 .xylo {
-  position: relative;                 /* ESSENTIEEL */
+  position: relative;
   width: 90%;
   max-width: 900px;
   aspect-ratio: 16 / 6;
@@ -24,29 +24,34 @@ h1 {
 }
 
 /* ---------- KLIKZONES (toetsen) ---------- */
+/* Brede, vergevingsgezinde zones, gecentreerd op elke balk */
 .key {
   position: absolute;
   top: 15%;
-  width: 8%;
   height: 70%;
+  width: 10%;
   background: transparent;
   border: none;
   cursor: pointer;
   touch-action: manipulation;
+  z-index: 10;
+
+  left: var(--x);
+  transform: translateX(-50%);
 }
 
-/* Posities van de 11 balken */
-.key:nth-of-type(1)  { left: 2%; }
-.key:nth-of-type(2)  { left: 11%; }
-.key:nth-of-type(3)  { left: 20%; }
-.key:nth-of-type(4)  { left: 29%; }
-.key:nth-of-type(5)  { left: 38%; }
-.key:nth-of-type(6)  { left: 47%; }
-.key:nth-of-type(7)  { left: 56%; }
-.key:nth-of-type(8)  { left: 65%; }
-.key:nth-of-type(9)  { left: 73%; }
-.key:nth-of-type(10) { left: 81%; }
-.key:nth-of-type(11) { left: 89%; }
+/* Centres (links -> rechts) van de 11 balken */
+.key:nth-of-type(1)  { --x: 6%; }
+.key:nth-of-type(2)  { --x: 15%; }
+.key:nth-of-type(3)  { --x: 24%; }
+.key:nth-of-type(4)  { --x: 33%; }
+.key:nth-of-type(5)  { --x: 42%; }
+.key:nth-of-type(6)  { --x: 51%; }
+.key:nth-of-type(7)  { --x: 60%; }
+.key:nth-of-type(8)  { --x: 69%; }
+.key:nth-of-type(9)  { --x: 77%; }
+.key:nth-of-type(10) { --x: 85%; }
+.key:nth-of-type(11) { --x: 93%; }
 
 /* ---------- MALLET (CSS GETEKEND) ---------- */
 .mallet {
@@ -54,7 +59,6 @@ h1 {
   width: 44px;
   height: 220px;
 
-  /* altijd aanwezig, enkel onzichtbaar */
   display: block;
   opacity: 0;
 
@@ -75,7 +79,7 @@ h1 {
   transform: translateX(-50%);
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #cfe6ff 0%, #76aef0 40%, #2f6fb8 100%);
-  box-shadow: 0 8px 14px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.25);
 }
 
 .mallet-head::before {
@@ -85,56 +89,4 @@ h1 {
   border-radius: 50%;
   background:
     radial-gradient(circle at 20% 25%, rgba(255,255,255,0.5) 0 12%, transparent 13%),
-    radial-gradient(circle at 60% 30%, rgba(255,255,255,0.25) 0 10%, transparent 11%),
-    radial-gradient(circle at 35% 60%, rgba(255,255,255,0.18) 0 12%, transparent 13%);
-}
-
-/* rood ringetje */
-.mallet-band {
-  position: absolute;
-  left: 50%;
-  top: 48px;
-  width: 18px;
-  height: 12px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: linear-gradient(to right, #b30000 0%, #ff3b3b 40%, #a80000 100%);
-  box-shadow: 0 2px 3px rgba(0,0,0,0.18);
-}
-
-/* houten stok */
-.mallet-stick {
-  position: absolute;
-  left: 50%;
-  top: 60px;
-  width: 14px;
-  height: 160px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: linear-gradient(
-    to right,
-    #d8b27a 0%,
-    #f0d6ad 30%,
-    #c9995b 55%,
-    #f0d6ad 80%,
-    #d8b27a 100%
-  );
-  box-shadow: 0 10px 12px rgba(0,0,0,0.18);
-}
-
-/* ---------- MALLET ACTIE ---------- */
-.mallet.hit {
-  opacity: 1;
-  animation: malletTap 160ms ease-out;
-}
-
-@keyframes malletTap {
-  0%   { transform: translate(-50%, -60%) rotate(20deg) scale(1); }
-  60%  { transform: translate(-50%, -60%) rotate(8deg)  scale(0.98); }
-  100% { transform: translate(-50%, -60%) rotate(20deg) scale(1); }
-  .key{
-  background: rgba(255, 0, 0, 0.20) !important;
-  outline: 2px solid rgba(255,0,0,0.6) !important;
-}
-
-}
+    radial-gradient(ci

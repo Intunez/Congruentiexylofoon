@@ -132,4 +132,9 @@ h1 {
   0%   { transform: translate(-50%, -60%) rotate(20deg) scale(1); }
   60%  { transform: translate(-50%, -60%) rotate(8deg)  scale(0.98); }
   100% { transform: translate(-50%, -60%) rotate(20deg) scale(1); }
+  .key{
+  background: rgba(255, 0, 0, 0.20) !important;
+  outline: 2px solid rgba(255,0,0,0.6) !important;
+}
+
 }

@@ -1,6 +1,9 @@
 const mallet = document.getElementById("mallet");
 const xylo = document.getElementById("xylo");
 
+// Cache audio voor snellere respons
+const audioCache = new Map();
+
 function showMalletAt(clientX, clientY) {
   const xyloRect = xylo.getBoundingClientRect();
   const x = clientX - xyloRect.left;
@@ -18,21 +21,27 @@ function showMalletAt(clientX, clientY) {
     mallet.classList.remove("hit");
   }, 200);
 }
-const note = key.dataset.note;
-console.log("Je klikte:", note);
-playNote(note);
 
 function playNote(note) {
   const url = `assets/sounds/${note}.mp3`;
-  const audio = new Audio(url);
 
-  // 👉 DEBUG: toont fout als bestand niet bestaat
-  audio.addEventListener("error", () => {
-    console.error("Kan audio niet laden:", url);
-  });
+  let audio = audioCache.get(note);
+  if (!audio) {
+    audio = new Audio(url);
 
+    // Als bestand niet gevonden wordt, zie je het meteen in de console
+    audio.addEventListener("error", () => {
+      console.error("Kan audio niet laden:", url);
+    });
+
+    audioCache.set(note, audio);
+  }
+
+  // opnieuw starten
   audio.currentTime = 0;
-  audio.play();
+  audio.play().catch((err) => {
+    console.error("Audio play() mislukte:", url, err);
+  });
 }
 
 document.querySelectorAll(".key").forEach((key) => {

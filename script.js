@@ -20,17 +20,19 @@ const notes = [
 const audioCache = new Map();
 
 function playNote(note) {
-  const url = `assets/sounds/${note}.mp3`;
+  // cache-busting: dwingt de browser om altijd de nieuwste mp3 op te halen
+  const url = `assets/sounds/${note}.mp3?v=${Date.now()}`;
 
-  let audio = audioCache.get(note);
-  if (!audio) {
-    audio = new Audio(url);
-    audioCache.set(note, audio);
+  console.log("Ik speel:", note, "=>", url);
 
-    audio.addEventListener("error", () => {
-      console.error("Kan audio niet laden:", url);
-    });
-  }
+  const audio = new Audio(url);
+
+  audio.addEventListener("error", () => {
+    console.error("Kan audio niet laden:", url);
+  });
+
+  audio.play().catch(err => console.error("play() fout:", err));
+}
 
   audio.currentTime = 0;
   audio.play();

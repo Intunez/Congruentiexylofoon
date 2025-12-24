@@ -16,7 +16,7 @@ const notes = [
   "fahoog"
 ];
 
-// audio cache (belangrijk!)
+// audio cache (sneller + stabiel)
 const audioCache = {};
 
 function playNote(note) {
@@ -28,7 +28,11 @@ function playNote(note) {
 
   const audio = audioCache[note];
   audio.currentTime = 0;
-  audio.play();
+
+  const p = audio.play();
+  if (p && typeof p.catch === "function") {
+    p.catch((err) => console.error("Audio play() mislukte:", url, err));
+  }
 }
 
 function showMalletAt(clientX, clientY) {
@@ -50,12 +54,16 @@ function showMalletAt(clientX, clientY) {
 }
 
 document.querySelectorAll(".key").forEach((key, index) => {
-  key.addEventListener("pointerdown", (ev) => {
-    ev.preventDefault();
+  key.addEventListener(
+    "pointerdown",
+    (ev) => {
+      ev.preventDefault();
 
-    const note = notes[index];
-    playNote(note);
+      const note = notes[index];
+      playNote(note);
 
-    showMalletAt(ev.clientX, ev.clientY);
-  });
+      showMalletAt(ev.clientX, ev.clientY);
+    },
+    { passive: false }
+  );
 });

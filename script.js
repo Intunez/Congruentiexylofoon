@@ -1,7 +1,7 @@
 const mallet = document.getElementById("mallet");
 const xylo = document.getElementById("xylo");
 
-/* VASTE NOOTVOLGORDE (links → rechts) */
+/* VASTE VOLGORDE: links → rechts */
 const notes = [
   "dolaag",
   "relaag",
@@ -16,24 +16,17 @@ const notes = [
   "fahoog"
 ];
 
-// audio cache
-const audioCache = new Map();
+// audio cache (belangrijk!)
+const audioCache = {};
 
 function playNote(note) {
-  // cache-busting: dwingt de browser om altijd de nieuwste mp3 op te halen
-  const url = `assets/sounds/${note}.mp3?v=${Date.now()}`;
+  const url = `assets/sounds/${note}.mp3`;
 
-  console.log("Ik speel:", note, "=>", url);
+  if (!audioCache[note]) {
+    audioCache[note] = new Audio(url);
+  }
 
-  const audio = new Audio(url);
-
-  audio.addEventListener("error", () => {
-    console.error("Kan audio niet laden:", url);
-  });
-
-  audio.play().catch(err => console.error("play() fout:", err));
-}
-
+  const audio = audioCache[note];
   audio.currentTime = 0;
   audio.play();
 }
@@ -56,12 +49,13 @@ function showMalletAt(clientX, clientY) {
   }, 200);
 }
 
-/* knop-index → noot */
 document.querySelectorAll(".key").forEach((key, index) => {
   key.addEventListener("pointerdown", (ev) => {
     ev.preventDefault();
+
     const note = notes[index];
     playNote(note);
+
     showMalletAt(ev.clientX, ev.clientY);
-  }, { passive: false });
+  });
 });

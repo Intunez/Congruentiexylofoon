@@ -4,6 +4,7 @@ body {
   background: #f4f4f4;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
 h1 {
@@ -15,42 +16,44 @@ h1 {
   position: relative;
   width: 90%;
   max-width: 900px;
-  aspect-ratio: 16 / 6;
   margin: 0 auto;
-  background-image: url("assets/xyloafbeelding.jpg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+}
+
+/* echte afbeelding → geen witte ruimte */
+.xylo-img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* ---------- KLIKZONES ---------- */
 .key {
   position: absolute;
-  top: 15%;
-  height: 70%;
-  width: 10%;
+  top: 0;
+  height: 100%;
+  width: 7.5%;
   background: transparent;
   border: none;
   cursor: pointer;
-  touch-action: manipulation;
   z-index: 10;
+  touch-action: manipulation;
 
   left: var(--x);
   transform: translateX(-50%);
 }
 
-/* vaste centers van links naar rechts */
-.key:nth-of-type(1)  { --x: 6%; }
-.key:nth-of-type(2)  { --x: 15%; }
-.key:nth-of-type(3)  { --x: 24%; }
-.key:nth-of-type(4)  { --x: 33%; }
-.key:nth-of-type(5)  { --x: 42%; }
-.key:nth-of-type(6)  { --x: 51%; }
-.key:nth-of-type(7)  { --x: 60%; }
-.key:nth-of-type(8)  { --x: 69%; }
-.key:nth-of-type(9)  { --x: 77%; }
-.key:nth-of-type(10) { --x: 85%; }
-.key:nth-of-type(11) { --x: 93%; }
+/* CENTRA van de 11 balken */
+.key:nth-of-type(1)  { --x: 7.5%; }
+.key:nth-of-type(2)  { --x: 16.5%; }
+.key:nth-of-type(3)  { --x: 25.5%; }
+.key:nth-of-type(4)  { --x: 34.5%; }
+.key:nth-of-type(5)  { --x: 43.5%; }
+.key:nth-of-type(6)  { --x: 52.5%; }
+.key:nth-of-type(7)  { --x: 61.5%; }
+.key:nth-of-type(8)  { --x: 70.5%; }
+.key:nth-of-type(9)  { --x: 79%; }
+.key:nth-of-type(10) { --x: 87%; }
+.key:nth-of-type(11) { --x: 95%; }
 
 /* ---------- MALLET ---------- */
 .mallet {

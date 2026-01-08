@@ -1,7 +1,7 @@
 const mallet = document.getElementById("mallet");
 const xylo = document.getElementById("xylo");
 
-/* VASTE NOOTVOLGORDE: links → rechts */
+/* 7 noten: toets 1 → toets 7 */
 const notes = [
   "dolaag",
   "relaag",
@@ -9,11 +9,7 @@ const notes = [
   "falaag",
   "sol",
   "la",
-  "si",
-  "dohoog",
-  "rehoog",
-  "mihoog",
-  "fahoog"
+  "si"
 ];
 
 const audioCache = {};
@@ -27,12 +23,15 @@ function playNote(note) {
 
   const audio = audioCache[note];
   audio.currentTime = 0;
-  audio.play();
+
+  const p = audio.play();
+  if (p && typeof p.catch === "function") {
+    p.catch((err) => console.error("Audio play() mislukte:", url, err));
+  }
 }
 
 function showMalletAt(clientX, clientY) {
   const rect = xylo.getBoundingClientRect();
-
   mallet.style.left = `${clientX - rect.left}px`;
   mallet.style.top  = `${clientY - rect.top}px`;
 
@@ -41,12 +40,9 @@ function showMalletAt(clientX, clientY) {
   mallet.classList.add("hit");
 
   clearTimeout(mallet._t);
-  mallet._t = setTimeout(() => {
-    mallet.classList.remove("hit");
-  }, 200);
+  mallet._t = setTimeout(() => mallet.classList.remove("hit"), 200);
 }
 
-/* KOPPELING: knop-index → noot */
 document.querySelectorAll(".key").forEach((key, index) => {
   key.addEventListener("pointerdown", (ev) => {
     ev.preventDefault();

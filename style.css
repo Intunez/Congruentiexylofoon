@@ -7,31 +7,28 @@ body {
   text-align: center;
 }
 
-h1 {
-  margin: 16px 0;
-}
+h1 { margin: 16px 0; }
 
 /* ---------- XYLO CONTAINER ---------- */
-.xylo {
+.xylo{
   position: relative;
   width: 90%;
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* echte afbeelding → geen witte ruimte */
-.xylo-img {
+.xylo-img{
   width: 100%;
   height: auto;
   display: block;
 }
 
 /* ---------- KLIKZONES ---------- */
-.key {
+.key{
   position: absolute;
   top: 0;
   height: 100%;
-  width: 7.5%;
+  width: 12%;              /* iets breder voor veilig klikken */
   background: transparent;
   border: none;
   cursor: pointer;
@@ -42,21 +39,17 @@ h1 {
   transform: translateX(-50%);
 }
 
-/* CENTRA van de 11 balken */
-.key:nth-of-type(1)  { --x: 7.5%; }
-.key:nth-of-type(2)  { --x: 16.5%; }
-.key:nth-of-type(3)  { --x: 25.5%; }
-.key:nth-of-type(4)  { --x: 34.5%; }
-.key:nth-of-type(5)  { --x: 43.5%; }
-.key:nth-of-type(6)  { --x: 52.5%; }
-.key:nth-of-type(7)  { --x: 61.5%; }
-.key:nth-of-type(8)  { --x: 70.5%; }
-.key:nth-of-type(9)  { --x: 79%; }
-.key:nth-of-type(10) { --x: 87%; }
-.key:nth-of-type(11) { --x: 95%; }
+/* CENTRA VAN JOUW 7 BALKEN (visueel afgesteld) */
+.key:nth-of-type(1) { --x: 9%;  }   /* rood  – dolaag */
+.key:nth-of-type(2) { --x: 22%; }   /* oranje – relaag */
+.key:nth-of-type(3) { --x: 35%; }   /* geel – milaag */
+.key:nth-of-type(4) { --x: 48%; }   /* lichtgroen – falaag */
+.key:nth-of-type(5) { --x: 61%; }   /* groen – sol */
+.key:nth-of-type(6) { --x: 74%; }   /* blauw – la */
+.key:nth-of-type(7) { --x: 87%; }   /* roze – si */
 
 /* ---------- MALLET ---------- */
-.mallet {
+.mallet{
   position: absolute;
   width: 44px;
   height: 220px;
@@ -67,7 +60,7 @@ h1 {
   transform-origin: 50% 20%;
 }
 
-.mallet-head {
+.mallet-head{
   position: absolute;
   left: 50%;
   top: 0;
@@ -79,7 +72,7 @@ h1 {
   box-shadow: 0 8px 14px rgba(0,0,0,0.25);
 }
 
-.mallet-band {
+.mallet-band{
   position: absolute;
   left: 50%;
   top: 48px;
@@ -90,7 +83,7 @@ h1 {
   background: linear-gradient(to right, #b30000 0%, #ff3b3b 40%, #a80000 100%);
 }
 
-.mallet-stick {
+.mallet-stick{
   position: absolute;
   left: 50%;
   top: 60px;
@@ -108,13 +101,12 @@ h1 {
   );
 }
 
-/* ---------- MALLET ANIMATIE ---------- */
-.mallet.hit {
+.mallet.hit{
   opacity: 1;
   animation: malletTap 160ms ease-out;
 }
 
-@keyframes malletTap {
+@keyframes malletTap{
   0%   { transform: translate(-50%, -60%) rotate(20deg); }
   60%  { transform: translate(-50%, -60%) rotate(8deg); }
   100% { transform: translate(-50%, -60%) rotate(20deg); }
